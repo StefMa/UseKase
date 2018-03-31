@@ -5,11 +5,13 @@
 # UseKase
 Provides default UseCase implementations for the Clean Architecture
 
-<!--
 ## Description
-// TODO
--->
+UseKase is a **Kotlin** library which provides a set of default implementation of UseCases. 
+Most of the UseCases depend on heavily on RxJava2. 
 
+I found my self copying [these implementaions](https://github.com/StefMa/UseKase/tree/master/usekase/src/main/java/guru/stefma/cleancomponents/usekase) in new projects again and again. Even if these contains only some lines of code it was just annyoing. So I decided to create this library which provides these for me.
+
+Because all Kotlin classes are `final` by default I created for each UseCase a `typealias` to the correct `interface`. This make the UseCase in Presenters testable. Because it was as annoying as copying and pasting the UseCase implementaions I created a annotation processor which creates the `typealias` at runtime for me. You can find the code for that in the [usekase-processor](https://github.com/StefMa/UseKase/tree/master/usekase-processor) module.
 
 ## How to use it
 
