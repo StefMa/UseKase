@@ -1,11 +1,11 @@
 package guru.stefma.cleancomponents.sample.usecase
 
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usekase.CompletableUseCase
-import guru.stefma.cleancomponents.usekase.MaybeUseCase
-import guru.stefma.cleancomponents.usekase.ObservableUseCase
-import guru.stefma.cleancomponents.usekase.RxUseCase
-import guru.stefma.cleancomponents.usekase.SingleUseCase
+import guru.stefma.cleancomponents.usecase.CompletableUseCase
+import guru.stefma.cleancomponents.usecase.MaybeUseCase
+import guru.stefma.cleancomponents.usecase.ObservableUseCase
+import guru.stefma.cleancomponents.usecase.RxUseCase
+import guru.stefma.cleancomponents.usecase.SingleUseCase
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -92,7 +92,7 @@ class TestCompletableUseCase(
 data class Params(val aBool: Boolean)
 
 @UseCase
-class TestGenericUseCase: guru.stefma.cleancomponents.usekase.UseCase<Array<Boolean>, Params> {
+class TestGenericUseCase: guru.stefma.cleancomponents.usecase.UseCase<Array<Boolean>, Params> {
 
     override fun buildUseCase(params: Params): Array<Boolean> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

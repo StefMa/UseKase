@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.usekase
+package guru.stefma.cleancomponents.usecase
 
 import io.reactivex.Observable
 

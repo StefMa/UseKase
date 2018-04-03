@@ -8,11 +8,11 @@ import com.squareup.kotlinpoet.TypeAliasSpec
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.asTypeName
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usekase.CompletableUseCase
-import guru.stefma.cleancomponents.usekase.MaybeUseCase
-import guru.stefma.cleancomponents.usekase.ObservableUseCase
-import guru.stefma.cleancomponents.usekase.RxUseCase
-import guru.stefma.cleancomponents.usekase.SingleUseCase
+import guru.stefma.cleancomponents.usecase.CompletableUseCase
+import guru.stefma.cleancomponents.usecase.MaybeUseCase
+import guru.stefma.cleancomponents.usecase.ObservableUseCase
+import guru.stefma.cleancomponents.usecase.RxUseCase
+import guru.stefma.cleancomponents.usecase.SingleUseCase
 import java.io.File
 import javax.annotation.processing.AbstractProcessor
 import javax.annotation.processing.Processor
@@ -42,7 +42,7 @@ class UseCaseProcessor : AbstractProcessor() {
                 ObservableUseCase::class.asTypeName(),
                 MaybeUseCase::class.asTypeName(),
                 CompletableUseCase::class.asTypeName(),
-                guru.stefma.cleancomponents.usekase.UseCase::class.asTypeName()
+                guru.stefma.cleancomponents.usecase.UseCase::class.asTypeName()
         )
     }
 
@@ -53,7 +53,7 @@ class UseCaseProcessor : AbstractProcessor() {
                 ObservableUseCase::class.qualifiedName,
                 MaybeUseCase::class.qualifiedName,
                 CompletableUseCase::class.qualifiedName,
-                guru.stefma.cleancomponents.usekase.UseCase::class.qualifiedName
+                guru.stefma.cleancomponents.usecase.UseCase::class.qualifiedName
         )
     }
 

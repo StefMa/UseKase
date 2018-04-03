@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.usekase
+package guru.stefma.cleancomponents.usecase
 
 /**
  * A UseCase is a "actor" or "transformer" in the clean architecture.
