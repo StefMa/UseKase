@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.processor.usekase
+package guru.stefma.cleancomponents.processor.usecase
 
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.ClassName
