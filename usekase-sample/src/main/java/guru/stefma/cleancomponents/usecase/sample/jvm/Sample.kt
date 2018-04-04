@@ -1,8 +1,8 @@
-package guru.stefma.cleancomponents.usekase.sample.jvm
+package guru.stefma.cleancomponents.usecase.sample.jvm
 
 import guru.stefma.cleancomponents.annotation.UseCase
 import guru.stefma.cleancomponents.usecase.SingleUseCase
-import guru.stefma.cleancomponents.usekase.sample.jvm.GetUserUseCase.Params
+import guru.stefma.cleancomponents.usecase.sample.jvm.GetUserUseCase.Params
 import io.reactivex.Scheduler
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -49,7 +49,7 @@ class GetUsePointsForUserIdUseCase(
 
     override fun buildUseCase(params: GetUsePointsForUserIdUseCase.Params): Single<Int> {
         return getUser.buildUseCase(
-                guru.stefma.cleancomponents.usekase.sample.jvm.GetUserUseCase.Params(params.userId))
+                guru.stefma.cleancomponents.usecase.sample.jvm.GetUserUseCase.Params(params.userId))
                 .flatMap {
                     Single.just(it.authorizationKey)
                             .map { 99 }
