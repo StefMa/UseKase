@@ -20,4 +20,5 @@ publish {
     publishVersion = "0.0.1"
     desc = "Provides default UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
+    setLicences("MIT")
 }
