@@ -96,17 +96,7 @@ class UseCaseProcessor : AbstractProcessor() {
         file.writeTo(folder)
     }
 
-    /**
-     * This will return the path to the directory where generated kotlin files should be life.
-     *
-     * But this will "workaround" it because the kaptKotlin dir is not automatically set as sourceSet.
-     * But the kapt directory is set correctly.
-     *
-     * // TODO: Find a better solution which don't put the generated files into kapt but in 'kapt.kotlin.generated'
-     */
-    private fun getGeneratedSourceDir(): String {
-        return processingEnv.options["kapt.kotlin.generated"]!!.replace("kaptKotlin", "kapt")
-    }
+    private fun getGeneratedSourceDir() = processingEnv.options["kapt.kotlin.generated"]!!
 
     override fun getSupportedSourceVersion(): SourceVersion {
         return SourceVersion.latestSupported()

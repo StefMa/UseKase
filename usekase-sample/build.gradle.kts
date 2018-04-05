@@ -22,7 +22,7 @@ dependencies {
 // Add generated kapt source code to main sourceSet
 java.sourceSets {
     getByName("main") {
-        java.srcDir("$buildDir/generated/source/kapt")
+        java.srcDir("$buildDir/generated/source/kaptKotlin")
     }
 }
 

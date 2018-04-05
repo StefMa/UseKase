@@ -32,6 +32,13 @@ android {
     dataBinding { enabled true }
 }
 
+// Add the generated source as sourceSet
+android.applicationVariants.all { variant ->
+    variant.addJavaSourceFoldersToModel()
+    def kotlinGenerated = file("$buildDir/generated/source/kaptKotlin/${variant.name}")
+    variant.addJavaSourceFoldersToModel(kotlinGenerated)
+}
+
 repositories {
     google()
     jcenter()
