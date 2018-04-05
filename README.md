@@ -1,6 +1,6 @@
-<!--[![CircleCI](https://img.shields.io/circleci/project/github/StefMa/UseKase.svg)](https://circleci.com/gh/StefMa/UseKase)-->
+[![CircleCI](https://img.shields.io/circleci/project/github/StefMa/UseKase.svg)](https://circleci.com/gh/StefMa/UseKase)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-<!--[![Download](https://api.bintray.com/packages/stefma/maven/UseKase/images/download.svg) ](https://bintray.com/stefma/maven/UseKase/_latestVersion)-->
+[![Download](https://api.bintray.com/packages/stefma/maven/UseKase/images/download.svg)](https://bintray.com/stefma/maven/UseKase/_latestVersion)
 
 # UseKase
 Provides default UseCase implementations for the Clean Architecture
