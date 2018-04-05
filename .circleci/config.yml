@@ -8,5 +8,5 @@ jobs:
       - checkout
 
       - run: ./gradlew :sample:testDebugUnitTest --no-daemon
-      - run: ./gradlew :sample:testReleasenitTest --no-daemon
+      - run: ./gradlew :sample:testReleaseUnitTest --no-daemon
       - run: ./gradlew :usekase-sample:test --no-daemon
