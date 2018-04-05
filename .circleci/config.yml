@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: stefma-docker-hub.bintray.io/android-build-env:0.2-alpha
+
+    steps:
+      - checkout
+
+      - run: ./gradlew :sample:testDebugUnitTest --no-daemon
+      - run: ./gradlew :sample:testReleasenitTest --no-daemon
+      - run: ./gradlew :usekase-sample:test --no-daemon
