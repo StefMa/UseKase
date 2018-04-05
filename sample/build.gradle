@@ -32,6 +32,13 @@ android {
     dataBinding { enabled true }
 }
 
+// Add the generated source as sourceSet
+android.applicationVariants.all { variant ->
+    variant.addJavaSourceFoldersToModel()
+    def kotlinGenerated = file("$buildDir/generated/source/kaptKotlin/${variant.name}")
+    variant.addJavaSourceFoldersToModel(kotlinGenerated)
+}
+
 repositories {
     google()
     jcenter()
@@ -42,10 +49,13 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation project(":usekase")
-    // Need rx java for use case
-    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
     kapt project(":usekase-processor")
-
-    // DataBinding
+    // Need rxjava for usekase
+    implementation "io.reactivex.rxjava2:rxjava:2.1.12"
+    // DataBinding - Just for demonstration purpose
     kapt "com.android.databinding:compiler:3.1.0"
+
+    testCompile "junit:junit:4.12"
+    testCompile "org.assertj:assertj-core:3.9.0"
+    testCompile "com.nhaarman:mockito-kotlin:1.5.0"
 }

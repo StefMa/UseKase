@@ -52,7 +52,7 @@ class TestRxUseCase(
 ) : RxUseCase<Array<String>, Boolean> {
 
     override fun buildUseCase(params: Boolean): Array<String> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return emptyArray()
     }
 }
 
@@ -63,7 +63,7 @@ class TestObservableUseCase(
 ) : ObservableUseCase<Array<String>, Boolean> {
 
     override fun buildUseCase(params: Boolean): Observable<Array<String>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Observable.just(emptyArray())
     }
 }
 
@@ -74,7 +74,7 @@ class TestMaybeUseCase(
 ) : MaybeUseCase<List<List<Boolean>>, Boolean> {
 
     override fun buildUseCase(params: Boolean): Maybe<List<List<Boolean>>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Maybe.error(Throwable())
     }
 }
 
@@ -85,16 +85,16 @@ class TestCompletableUseCase(
 ) : CompletableUseCase<List<List<Boolean>>> {
 
     override fun buildUseCase(params: List<List<Boolean>>): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return Completable.complete()
     }
 }
 
 data class Params(val aBool: Boolean)
 
 @UseCase
-class TestGenericUseCase: guru.stefma.cleancomponents.usecase.UseCase<Array<Boolean>, Params> {
+class TestGenericUseCase : guru.stefma.cleancomponents.usecase.UseCase<Array<Boolean>, Params> {
 
     override fun buildUseCase(params: Params): Array<Boolean> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return arrayOf(params.aBool)
     }
 }
