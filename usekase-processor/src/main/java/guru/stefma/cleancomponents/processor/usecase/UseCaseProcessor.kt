@@ -13,8 +13,8 @@ import guru.stefma.cleancomponents.usecase.MaybeUseCase
 import guru.stefma.cleancomponents.usecase.ObservableUseCase
 import guru.stefma.cleancomponents.usecase.RxUseCase
 import guru.stefma.cleancomponents.usecase.SingleUseCase
-import java.io.File
-import javax.annotation.processing.AbstractProcessor
+import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
+import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
@@ -33,7 +33,7 @@ private class ClassInfo(
 }
 
 @AutoService(Processor::class)
-class UseCaseProcessor : AbstractProcessor() {
+class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
 
     private val useCaseTypeName by lazy {
         listOf(
@@ -57,16 +57,15 @@ class UseCaseProcessor : AbstractProcessor() {
         )
     }
 
-    @Synchronized
-    override fun process(elements: MutableSet<out TypeElement>, environment: RoundEnvironment): Boolean {
+    override fun process(annotations: Set<TypeElement>, roundEnv: RoundEnvironment): Boolean {
         // processingEnv.messager.printMessage(WARNING, "Hello World")
-        environment.getElementsAnnotatedWith(UseCase::class.java).forEach {
+        roundEnv.getElementsAnnotatedWith(UseCase::class.java).forEach {
             if (it.kind != ElementKind.CLASS) {
                 return false
             }
 
             val className = it.simpleName.toString()
-            val classPackage = processingEnv.elementUtils.getPackageOf(it).toString()
+            val classPackage = elementUtils.getPackageOf(it).toString()
             ((it as TypeElement).interfaces).forEach {
                 val declaredType = it as DeclaredType
 
@@ -92,11 +91,11 @@ class UseCaseProcessor : AbstractProcessor() {
                 .addTypeAlias(TypeAliasSpec.builder(classInfo.className, extension).build())
                 .build()
 
-        val folder = File(getGeneratedSourceDir()).apply { mkdirs() }
-        file.writeTo(folder)
+        generatedDir?.also {
+            it.mkdirs()
+            file.writeTo(it)
+        }
     }
-
-    private fun getGeneratedSourceDir() = processingEnv.options["kapt.kotlin.generated"]!!
 
     override fun getSupportedSourceVersion(): SourceVersion {
         return SourceVersion.latestSupported()
