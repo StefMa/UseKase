@@ -24,6 +24,43 @@ class TestSingleUseCase(
 }
 
 @UseCase
+class CustomUseCase (
+        override val executionScheduler: Scheduler,
+        override val postExecutionScheduler: Scheduler
+): CompletableUseCase<CustomUseCase.Uhu<String, Int, Pair<String, Int>>> {
+
+    override fun buildUseCase(params: Uhu<String, Int, Pair<String, Int>>): Completable {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    class Uhu<T, P, K> {
+
+    }
+}
+
+@UseCase
+class TestSingleMPairUseCase(
+        override val executionScheduler: Scheduler,
+        override val postExecutionScheduler: Scheduler
+) : SingleUseCase<Pair<String, Int>, Boolean> {
+
+    override fun buildUseCase(params: Boolean): Single<Pair<String, Int>> {
+        return Single.just(Pair("", 2))
+    }
+}
+
+@UseCase
+class TestSingleMapUseCase(
+        override val executionScheduler: Scheduler,
+        override val postExecutionScheduler: Scheduler
+) : SingleUseCase<Map<String, Int>, Boolean> {
+
+    override fun buildUseCase(params: Boolean): Single<Map<String, Int>> {
+        return Single.just(emptyMap())
+    }
+}
+
+@UseCase
 class AwesomeSingleMoreUseCase(
         override val executionScheduler: Scheduler,
         override val postExecutionScheduler: Scheduler
@@ -85,6 +122,17 @@ class TestCompletableUseCase(
 ) : CompletableUseCase<List<List<Boolean>>> {
 
     override fun buildUseCase(params: List<List<Boolean>>): Completable {
+        return Completable.complete()
+    }
+}
+
+@UseCase
+class TestCompletableMapUseCase(
+        override val executionScheduler: Scheduler,
+        override val postExecutionScheduler: Scheduler
+) : CompletableUseCase<Map<String, Int>> {
+
+    override fun buildUseCase(params: Map<String, Int>): Completable {
         return Completable.complete()
     }
 }

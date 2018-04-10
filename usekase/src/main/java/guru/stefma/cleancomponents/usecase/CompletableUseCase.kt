@@ -8,7 +8,7 @@ import io.reactivex.Completable
  * It will use the provided [executionScheduler] and [postExecutionScheduler] as
  * [Completable.subscribeOn] and [Completable.observeOn].
  */
-interface CompletableUseCase<in P> : RxUseCase<Completable, P> {
+interface CompletableUseCase<P> : RxUseCase<Completable, P> {
 
     override fun execute(params: P): Completable = buildUseCase(params)
             .subscribeOn(executionScheduler)
