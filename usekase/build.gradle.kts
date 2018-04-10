@@ -28,7 +28,7 @@ publish {
     groupId = "guru.stefma.cleancomponents"
     artifactId = "usekase"
     uploadName = "UseKase"
-    publishVersion = "0.0.1"
+    publishVersion = "0.0.2"
     desc = "Provides default UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
     setLicences("MIT")
