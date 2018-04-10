@@ -8,7 +8,7 @@ import io.reactivex.Single
  * It will use the provided [executionScheduler] and [postExecutionScheduler] as
  * [Single.subscribeOn] and [Single.observeOn].
  */
-interface SingleUseCase<R, in P> : RxUseCase<Single<R>, P> {
+interface SingleUseCase<R, P> : RxUseCase<Single<R>, P> {
 
     override fun execute(params: P): Single<R> = buildUseCase(params)
             .subscribeOn(executionScheduler)

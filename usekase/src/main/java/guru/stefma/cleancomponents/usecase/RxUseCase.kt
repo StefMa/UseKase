@@ -13,7 +13,7 @@ import io.reactivex.Scheduler
  * @see MaybeUseCase
  * @see CompletableUseCase
  */
-interface RxUseCase<out R, in P> : UseCase<R, P> {
+interface RxUseCase<R, P> : UseCase<R, P> {
 
     val executionScheduler: Scheduler
 

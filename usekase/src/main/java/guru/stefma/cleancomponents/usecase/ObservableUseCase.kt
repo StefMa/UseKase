@@ -8,7 +8,7 @@ import io.reactivex.Observable
  * It will use the provided [executionScheduler] and [postExecutionScheduler] as
  * [Observable.subscribeOn] and [Observable.observeOn].
  */
-interface ObservableUseCase<R, in P> : RxUseCase<Observable<R>, P> {
+interface ObservableUseCase<R, P> : RxUseCase<Observable<R>, P> {
 
     override fun execute(params: P): Observable<R> = buildUseCase(params)
             .subscribeOn(executionScheduler)

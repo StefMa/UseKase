@@ -10,7 +10,7 @@ package guru.stefma.cleancomponents.usecase
  * @param P the params you want to put in to the UseCase
  * @param R the result value which will be emitted by this UseCase
  */
-interface UseCase<out R, in P> {
+interface UseCase<R, P> {
 
     fun buildUseCase(params: P): R
 
