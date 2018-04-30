@@ -28,8 +28,10 @@ class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
             val className = it.simpleName.toString()
             val classPackage = elementUtils.getPackageOf(it).toString()
             val fullName = it.fullName()
+            val documentation = extractDocumentation(it)
 
-            val generatedClass = GeneratedClass(messager, className, classPackage, fullName)
+            val generatedClass = GeneratedClass(messager, className, classPackage, fullName,
+                    documentation)
             createTypeAlias(generatedClass)
         }
 
@@ -39,12 +41,26 @@ class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
     private fun createTypeAlias(generatedClass: GeneratedClass) = generatedDir?.also {
         val file = FileSpec.builder(generatedClass.classPackage, generatedClass.fileName)
                 .addTypeAlias(
-                        TypeAliasSpec.builder(generatedClass.className, generatedClass.typeNameFromGenerics).build()
+                        TypeAliasSpec.builder(generatedClass.className, generatedClass.typeNameFromGenerics)
+                                .addKdoc(generatedClass.documentation)
+                                .build()
                 )
                 .build()
 
         it.mkdirs()
         file.writeTo(it)
+    }
+
+    /**
+     * Reads the documentation of the given element and returns it as a String.
+     *
+     * The `*` at the beginning of each line of the documentation are also being read, therefore
+     * this method removes any leading `*` from the read documentation.
+     */
+    private fun extractDocumentation(element: Element): String? {
+        return elementUtils.getDocComment(element)
+                ?.replace(" * ", "")
+                ?.replace(" *\n", "\n")
     }
 
     override fun getSupportedSourceVersion(): SourceVersion {
