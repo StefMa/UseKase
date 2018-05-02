@@ -24,8 +24,11 @@ internal data class GeneratedClass(
         private val messager: Messager,
         private val _className: String,
         val classPackage: String,
-        private val fullName: String
+        private val fullName: String,
+        private val _documentation: String?
 ) {
+
+    val documentation = _documentation ?: ""
 
     val fileName by lazy {
         "${className}TypeAlias"
