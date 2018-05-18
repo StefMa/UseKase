@@ -4,11 +4,14 @@ import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeAliasSpec
 import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.*
 import me.eugeniomarletti.kotlin.metadata.KotlinClassMetadata
 import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
 import me.eugeniomarletti.kotlin.metadata.extractFullName
 import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
 import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
+import org.jetbrains.kotlin.serialization.ClassData
+import org.jetbrains.kotlin.serialization.ProtoBuf
 import javax.annotation.processing.Processor
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.SourceVersion
@@ -30,8 +33,7 @@ class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
             val fullName = it.fullName()
             val documentation = extractDocumentation(it)
 
-            val generatedClass = GeneratedClass(messager, className, classPackage, fullName,
-                    documentation)
+            val generatedClass = GeneratedClass(messager, className, classPackage, fullName, documentation)
             createTypeAlias(generatedClass)
         }
 
@@ -86,6 +88,20 @@ class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
 private fun Element.fullName(): String {
     val metadata = kotlinMetadata as KotlinClassMetadata
     val proto = metadata.data.classProto
-    val name = proto.supertypeList[0].extractFullName(metadata.data)
+    val name = proto.findUseCase(metadata.data)
     return name.replace("`", "").replace("`", "")
+}
+
+private fun ProtoBuf.Class.findUseCase(classData: ClassData): String {
+    val foundUseCase = supertypeList.find {
+        val fullName = it.extractFullName(classData)
+        fullName.contains(SingleUseCase::class.java.simpleName)
+                || fullName.contains(CompletableUseCase::class.java.simpleName)
+                || fullName.contains(MaybeUseCase::class.java.simpleName)
+                || fullName.contains(ObservableUseCase::class.java.simpleName)
+                || fullName.contains(RxUseCase::class.java.simpleName)
+                || fullName.contains(guru.stefma.cleancomponents.usecase.UseCase::class.java.simpleName)
+    }
+
+    return foundUseCase?.extractFullName(classData) ?: throw IllegalArgumentException("You don't implement a UseCase!")
 }
