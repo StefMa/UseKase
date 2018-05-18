@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.2.31"
-    kotlin("kapt") version "1.2.31"
+    kotlin("jvm") version "1.2.41"
+    kotlin("kapt") version "1.2.41"
     id("com.novoda.bintray-release") version "0.8.1"
 }
 
@@ -9,7 +9,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.31")
+    implementation(kotlin("stdlib-jdk7"))
     implementation("com.squareup:kotlinpoet:0.7.0")
     implementation("com.google.auto.service:auto-service:1.0-rc4")
     implementation("me.eugeniomarletti.kotlin.metadata:kotlin-metadata:1.3.0")
