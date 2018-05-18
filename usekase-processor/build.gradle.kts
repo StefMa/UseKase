@@ -12,7 +12,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk7"))
     implementation("com.squareup:kotlinpoet:0.7.0")
     implementation("com.google.auto.service:auto-service:1.0-rc4")
-    implementation("me.eugeniomarletti.kotlin.metadata:kotlin-metadata:1.3.0")
+    implementation("me.eugeniomarletti.kotlin.metadata:kotlin-metadata:1.4.0")
     kapt("com.google.auto.service:auto-service:1.0-rc4")
     compileOnly(project(":usekase"))
 }
