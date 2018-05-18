@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.2.31"
-    kotlin("kapt") version "1.2.31"
+    kotlin("jvm") version "1.2.41"
+    kotlin("kapt") version "1.2.41"
 }
 
 repositories {
@@ -10,7 +10,7 @@ repositories {
 dependencies {
     compile(project(":usekase"))
     kapt(project(":usekase-processor"))
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre7:1.2.31")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41")
     compile("io.reactivex.rxjava2:rxjava:2.1.12")
 
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.0")
