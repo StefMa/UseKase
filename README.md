@@ -30,7 +30,7 @@ dependencies {
   implementation("io.reactivex.rxjava2:rxjava:$rxJava2Version")
 
   // Alternatively (but highly recommended): usekase-processor
-  implementation("guru.stefma.cleancomponents:usekase-processor:$useKaseVersion")
+  kapt("guru.stefma.cleancomponents:usekase-processor:$useKaseVersion")
 }
 ```
 
