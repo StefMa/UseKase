@@ -4,6 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
+import guru.stefma.cleancomponents.annotation.UseCase
 import javax.annotation.processing.Messager
 import javax.lang.model.element.Element
 
@@ -16,12 +17,13 @@ import javax.lang.model.element.Element
  * You can then access the following properties:
  *
  * [fileName] // This is [className]+TypeAlias (E.g. GetUserTypeAlias)
- * [className] // This is [_className]-UseCase (E.g. GetUser)
+ * [className] // This follows the rules defined in the [UseCase].
  * [classPackage] // This is the [classPackage] without any modification (E.g. guru.stefma.app.usecase)
  * [typeNameFromGenerics] // A [TypeName] which contains all generics in it. (E.g. guru.stefma.app.usecase.ObservableUseCase<kotlin.Array<kotlin.String>, kotlin.Boolean>)
  */
 internal data class GeneratedClass(
         private val messager: Messager,
+        private val useCaseAnnotation: UseCase,
         private val _className: String,
         val classPackage: String,
         private val fullName: String,
@@ -35,7 +37,15 @@ internal data class GeneratedClass(
     }
 
     val className by lazy {
-        _className.replace("UseCase", "")
+         when {
+             useCaseAnnotation.name.isNotEmpty() -> useCaseAnnotation.name
+             useCaseAnnotation.prefix.isNotEmpty() && useCaseAnnotation.suffix.isNotEmpty() -> {
+                "${useCaseAnnotation.prefix}$_className${useCaseAnnotation.suffix}"
+            }
+             useCaseAnnotation.prefix.isNotEmpty() -> "${useCaseAnnotation.prefix}$_className"
+             useCaseAnnotation.suffix.isNotEmpty() -> "$_className${useCaseAnnotation.suffix}"
+            else -> _className.replace("UseCase", "")
+        }
     }
 
     /**
