@@ -7,6 +7,9 @@ import io.reactivex.Maybe
  *
  * It will use the provided [executionScheduler] and [postExecutionScheduler] as
  * [Maybe.subscribeOn] and [Maybe.observeOn].
+ *
+ * @param P the params you want to put in to the UseCase
+ * @param R the result value which will be emitted by this UseCase
  */
 interface MaybeUseCase<R, P> : RxUseCase<Maybe<R>, P> {
 

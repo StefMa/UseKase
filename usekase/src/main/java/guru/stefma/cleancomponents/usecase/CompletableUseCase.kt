@@ -7,6 +7,8 @@ import io.reactivex.Completable
  *
  * It will use the provided [executionScheduler] and [postExecutionScheduler] as
  * [Completable.subscribeOn] and [Completable.observeOn].
+ *
+ * @param P the params you want to put in to the UseCase
  */
 interface CompletableUseCase<P> : RxUseCase<Completable, P> {
 
