@@ -10,9 +10,11 @@ import javax.lang.model.element.Element
 
 /**
  * A utility class which should be constructed with three information:
- * * _clazzName // The origin name of the class (E.g. GetUserUserCase)
- * * clazzPackage // The package of that class (E.g. guru.stefma.app.usecase)
+ * * useCaseAnnotation // The [UseCase] annotation to extract information like [UseCase.prefix], [UseCase.suffix] and [UseCase.name]
+ * * _className // The origin name of the class (E.g. GetUserUserCase)
+ * * classPackage // The package of that class (E.g. guru.stefma.app.usecase)
  * * fullName // The full "name" of the class (E.g. guru.stefma.app.usecase.ObservableUseCase<kotlin.Array<kotlin.String>, kotlin.Boolean>)
+ * * _documentation // The documentation for that UseCase. Can be `null`
  *
  * You can then access the following properties:
  *
@@ -20,6 +22,7 @@ import javax.lang.model.element.Element
  * [className] // This follows the rules defined in the [UseCase].
  * [classPackage] // This is the [classPackage] without any modification (E.g. guru.stefma.app.usecase)
  * [typeNameFromGenerics] // A [TypeName] which contains all generics in it. (E.g. guru.stefma.app.usecase.ObservableUseCase<kotlin.Array<kotlin.String>, kotlin.Boolean>)
+ * [documentation] // The documentation for the generated TypeAlias. Will be either the provided doc or an empty string
  */
 internal data class GeneratedClass(
         private val messager: Messager,
