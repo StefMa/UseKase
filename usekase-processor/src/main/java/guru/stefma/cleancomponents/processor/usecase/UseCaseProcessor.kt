@@ -4,16 +4,8 @@ import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeAliasSpec
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usecase.CompletableUseCase
-import guru.stefma.cleancomponents.usecase.MaybeUseCase
-import guru.stefma.cleancomponents.usecase.ObservableUseCase
-import guru.stefma.cleancomponents.usecase.RxUseCase
-import guru.stefma.cleancomponents.usecase.SingleUseCase
-import me.eugeniomarletti.kotlin.metadata.ClassData
-import me.eugeniomarletti.kotlin.metadata.KotlinClassMetadata
-import me.eugeniomarletti.kotlin.metadata.KotlinMetadataUtils
-import me.eugeniomarletti.kotlin.metadata.extractFullName
-import me.eugeniomarletti.kotlin.metadata.kotlinMetadata
+import guru.stefma.cleancomponents.usecase.*
+import me.eugeniomarletti.kotlin.metadata.*
 import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
 import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
 import javax.annotation.processing.Processor
@@ -33,11 +25,12 @@ class UseCaseProcessor : KotlinAbstractProcessor(), KotlinMetadataUtils {
             }
 
             val className = it.simpleName.toString()
+            val annotation = it.getAnnotation(UseCase::class.java)
             val classPackage = elementUtils.getPackageOf(it).toString()
             val fullName = it.fullName()
             val documentation = extractDocumentation(it)
 
-            val generatedClass = GeneratedClass(messager, className, classPackage, fullName, documentation)
+            val generatedClass = GeneratedClass(messager, annotation, className, classPackage, fullName, documentation)
             createTypeAlias(generatedClass)
         }
 

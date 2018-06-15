@@ -4,24 +4,29 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
+import guru.stefma.cleancomponents.annotation.UseCase
 import javax.annotation.processing.Messager
 import javax.lang.model.element.Element
 
 /**
  * A utility class which should be constructed with three information:
- * * _clazzName // The origin name of the class (E.g. GetUserUserCase)
- * * clazzPackage // The package of that class (E.g. guru.stefma.app.usecase)
+ * * useCaseAnnotation // The [UseCase] annotation to extract information like [UseCase.prefix], [UseCase.suffix] and [UseCase.name]
+ * * _className // The origin name of the class (E.g. GetUserUserCase)
+ * * classPackage // The package of that class (E.g. guru.stefma.app.usecase)
  * * fullName // The full "name" of the class (E.g. guru.stefma.app.usecase.ObservableUseCase<kotlin.Array<kotlin.String>, kotlin.Boolean>)
+ * * _documentation // The documentation for that UseCase. Can be `null`
  *
  * You can then access the following properties:
  *
  * [fileName] // This is [className]+TypeAlias (E.g. GetUserTypeAlias)
- * [className] // This is [_className]-UseCase (E.g. GetUser)
+ * [className] // This follows the rules defined in the [UseCase].
  * [classPackage] // This is the [classPackage] without any modification (E.g. guru.stefma.app.usecase)
  * [typeNameFromGenerics] // A [TypeName] which contains all generics in it. (E.g. guru.stefma.app.usecase.ObservableUseCase<kotlin.Array<kotlin.String>, kotlin.Boolean>)
+ * [documentation] // The documentation for the generated TypeAlias. Will be either the provided doc or an empty string
  */
 internal data class GeneratedClass(
         private val messager: Messager,
+        private val useCaseAnnotation: UseCase,
         private val _className: String,
         val classPackage: String,
         private val fullName: String,
@@ -35,7 +40,15 @@ internal data class GeneratedClass(
     }
 
     val className by lazy {
-        _className.replace("UseCase", "")
+         when {
+             useCaseAnnotation.name.isNotEmpty() -> useCaseAnnotation.name
+             useCaseAnnotation.prefix.isNotEmpty() && useCaseAnnotation.suffix.isNotEmpty() -> {
+                "${useCaseAnnotation.prefix}$_className${useCaseAnnotation.suffix}"
+            }
+             useCaseAnnotation.prefix.isNotEmpty() -> "${useCaseAnnotation.prefix}$_className"
+             useCaseAnnotation.suffix.isNotEmpty() -> "$_className${useCaseAnnotation.suffix}"
+            else -> _className.replace("UseCase", "")
+        }
     }
 
     /**
