@@ -8,11 +8,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly(kotlin("stdlib-jdk7"))
-    compileOnly("io.reactivex.rxjava2:rxjava:2.1.12")
-
-    testImplementation(kotlin("stdlib-jdk7"))
-    testImplementation("io.reactivex.rxjava2:rxjava:2.1.12")
+    implementation(kotlin("stdlib-jdk7"))
+    implementation("io.reactivex.rxjava2:rxjava:2.1.12")
 
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.0")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.1.0")
