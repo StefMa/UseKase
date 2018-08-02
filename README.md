@@ -60,6 +60,7 @@ All available `UseCase` implementations are:
 * `UseCase<R, P>`
 * `RxUseCase<R, P>`
 * `SingleUseCase<R, P>`
+* `FlowableUseCase<R, P>`
 * `ObservableUseCase<R, P>`
 * `MaybeUseCase<R, P>`
 * `CompletableUseCase<P>`
