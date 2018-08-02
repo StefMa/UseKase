@@ -1,12 +1,9 @@
 package guru.stefma.cleancomponents.usecase
 
-import io.reactivex.Completable
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Scheduler
-import io.reactivex.Single
+import io.reactivex.*
 import io.reactivex.observers.TestObserver
 import io.reactivex.schedulers.TestScheduler
+import io.reactivex.subscribers.TestSubscriber
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 
@@ -117,6 +114,24 @@ class UseCaseTest {
         useCaseImpl.execute(true).test().assert(true.toString())
     }
 
+    @Test
+    @DisplayName("FlowableUseCase")
+    fun `default flowableusecase`() {
+        val useCaseImpl = object : FlowableUseCase<String, Boolean> {
+            override val executionScheduler: Scheduler
+                get() = testScheduler
+
+            override val postExecutionScheduler: Scheduler
+                get() = testScheduler
+
+            override fun buildUseCase(params: Boolean): Flowable<String> {
+                return Flowable.just(params.toString())
+            }
+        }
+
+        useCaseImpl.execute(true).test().assert(true.toString())
+    }
+
     private fun UseCase<String, Boolean>.executeAndAssert(param: Boolean, expected: String) {
         val value = execute(param)
 
@@ -125,6 +140,13 @@ class UseCaseTest {
     }
 
     private fun <T> TestObserver<T>.assert(value: T? = null) {
+        testScheduler.triggerActions()
+        assertComplete()
+        assertNoErrors()
+        if (value != null) assertValue(value)
+    }
+
+    private fun <T> TestSubscriber<T>.assert(value: T? = null) {
         testScheduler.triggerActions()
         assertComplete()
         assertNoErrors()

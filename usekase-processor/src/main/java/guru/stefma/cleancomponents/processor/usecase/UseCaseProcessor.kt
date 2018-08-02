@@ -99,6 +99,7 @@ private fun ProtoBuf.Class.findUseCase(classData: ClassData): String {
                 || fullName.contains(MaybeUseCase::class.java.simpleName)
                 || fullName.contains(ObservableUseCase::class.java.simpleName)
                 || fullName.contains(RxUseCase::class.java.simpleName)
+                || fullName.contains(FlowableUseCase::class.java.simpleName)
                 || fullName.contains(guru.stefma.cleancomponents.usecase.UseCase::class.java.simpleName)
     }
 
