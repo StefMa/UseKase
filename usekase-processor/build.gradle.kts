@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.2.41"
-    kotlin("kapt") version "1.2.41"
+    kotlin("jvm") version "1.2.60"
+    kotlin("kapt") version "1.2.60"
     id("com.novoda.bintray-release") version "0.8.1"
 }
 
@@ -11,8 +11,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk7"))
     implementation("com.squareup:kotlinpoet:0.7.0")
-    implementation("com.google.auto.service:auto-service:1.0-rc4")
     implementation("me.eugeniomarletti.kotlin.metadata:kotlin-metadata:1.4.0")
+    implementation("com.google.auto.service:auto-service:1.0-rc4")
     kapt("com.google.auto.service:auto-service:1.0-rc4")
     compileOnly(project(":usekase"))
 }
