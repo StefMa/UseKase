@@ -31,8 +31,23 @@ dependencies {
 }
 ```
 
-### Usage
-Just implement one of the provided default UseCase implementation and add the `@UseCase` annotation to it:
+### Configurate the `sourceSet`
+First you have to add the **generated source dir** to your `sourceSet`.
+You can do this by adding the following into your `build.gradle` file:
+```groovy
+// Add the generated source as sourceSet
+android.applicationVariants.all { variant ->
+    variant.addJavaSourceFoldersToModel()
+    def kotlinGenerated = file("$buildDir/generated/source/kaptKotlin/${variant.name}")
+    variant.addJavaSourceFoldersToModel(kotlinGenerated)
+}
+```
+For pure Kotlin projects the syntax is a little bit different. 
+See [this issue](https://github.com/StefMa/UseKase/issues/1#issuecomment-378848103) for more.
+
+### Create a `UseCase`
+You can just implement one of the provided default UseCase implementations
+and add the `@UseCase` annotation to it:
 ```kotlin
 @UseCase
 GetUserUseCase(
