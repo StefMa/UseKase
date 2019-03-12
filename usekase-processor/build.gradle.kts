@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.2.60"
-    kotlin("kapt") version "1.2.60"
+    kotlin("jvm") version "1.3.21"
+    kotlin("kapt") version "1.3.21"
     id("com.novoda.bintray-release") version "0.8.1"
 }
 
