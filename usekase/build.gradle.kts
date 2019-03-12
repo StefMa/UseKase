@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.2.60"
+    kotlin("jvm") version "1.3.21"
     id("com.novoda.bintray-release") version "0.8.1"
 }
 
@@ -9,11 +9,9 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk7"))
-    implementation("io.reactivex.rxjava2:rxjava:2.2.0")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.7")
 
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
-    testImplementation("org.assertj:assertj-core:3.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 }
 
 tasks.withType<Test> {

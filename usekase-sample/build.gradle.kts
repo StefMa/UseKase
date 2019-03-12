@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.2.41"
-    kotlin("kapt") version "1.2.41"
+    kotlin("jvm") version "1.3.21"
+    kotlin("kapt") version "1.3.21"
 }
 
 repositories {
@@ -8,19 +8,18 @@ repositories {
 }
 
 dependencies {
-    compile(project(":usekase"))
+    implementation(project(":usekase"))
     kapt(project(":usekase-processor"))
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.41")
-    compile("io.reactivex.rxjava2:rxjava:2.1.12")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21")
+    implementation("io.reactivex.rxjava2:rxjava:2.2.7")
 
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.1.0")
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.1.0")
-    testCompile("org.assertj:assertj-core:3.9.0")
-    testCompile("com.nhaarman:mockito-kotlin:1.5.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")
+    testImplementation("org.assertj:assertj-core:3.12.1")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
 }
 
 // Add generated kapt source code to main sourceSet
-java.sourceSets {
+sourceSets {
     getByName("main") {
         java.srcDir("$buildDir/generated/source/kaptKotlin")
     }
