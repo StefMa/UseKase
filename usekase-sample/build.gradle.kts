@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    implementation(project(":usekase"))
+    implementation(project(":usekase-rx"))
     kapt(project(":usekase-processor"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21")
     implementation("io.reactivex.rxjava2:rxjava:2.2.7")

@@ -1,7 +1,7 @@
 package guru.stefma.cleancomponents.usecase.sample.jvm
 
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usecase.SingleUseCase
+import guru.stefma.cleancomponents.usecase.rx.SingleUseCase
 import guru.stefma.cleancomponents.usecase.sample.jvm.GetUserUseCase.Params
 import io.reactivex.Scheduler
 import io.reactivex.Single
@@ -26,7 +26,7 @@ data class User(
 class GetUserUseCase(
         override val executionScheduler: Scheduler = Schedulers.io(),
         override val postExecutionScheduler: Scheduler = Schedulers.trampoline()
-) : SingleUseCase<User, GetUserUseCase.Params> {
+) : SingleUseCase<User, Params> {
 
     override fun buildUseCase(params: GetUserUseCase.Params): Single<User> {
         return Single.just(User(params.userId, "Thorsten", Gender.MALE, Random().nextInt(1000).toString()))

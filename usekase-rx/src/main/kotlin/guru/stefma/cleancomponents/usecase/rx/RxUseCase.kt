@@ -1,5 +1,6 @@
-package guru.stefma.cleancomponents.usecase
+package guru.stefma.cleancomponents.usecase.rx
 
+import guru.stefma.cleancomponents.usecase.UseCase
 import io.reactivex.Scheduler
 
 /**
