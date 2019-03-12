@@ -13,4 +13,4 @@ pluginManagement {
 }
 
 include ':sample', ':usekase-sample'
-include ':usekase-annotation', ':usekase', ':usekase-processor'
+include ':usekase-annotation', ':usekase', ':usekase-rx', ':usekase-processor'

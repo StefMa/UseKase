@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.usecase
+package guru.stefma.cleancomponents.usecase.rx
 
 import io.reactivex.Single
 
