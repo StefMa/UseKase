@@ -12,4 +12,5 @@ pluginManagement {
     }
 }
 
-include ':sample', ':usekase', ':usekase-processor', ':usekase-sample'
+include ':sample', ':usekase-sample'
+include ':usekase-annotation', ':usekase', ':usekase-processor'

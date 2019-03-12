@@ -8,6 +8,7 @@ repositories {
 }
 
 dependencies {
+    api(project(":usekase-annotation"))
     implementation(kotlin("stdlib-jdk7"))
     implementation("io.reactivex.rxjava2:rxjava:2.2.7")
 
