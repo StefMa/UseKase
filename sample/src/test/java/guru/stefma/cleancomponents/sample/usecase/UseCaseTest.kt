@@ -1,6 +1,6 @@
 package guru.stefma.cleancomponents.sample.usecase
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.mock
 import guru.stefma.cleancomponents.usecase.CompletableUseCase
 import guru.stefma.cleancomponents.usecase.MaybeUseCase
 import guru.stefma.cleancomponents.usecase.ObservableUseCase

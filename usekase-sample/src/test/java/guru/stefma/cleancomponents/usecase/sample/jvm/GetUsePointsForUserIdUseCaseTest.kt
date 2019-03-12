@@ -1,6 +1,9 @@
 package guru.stefma.cleancomponents.usecase.sample.jvm
 
-import com.nhaarman.mockito_kotlin.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import guru.stefma.cleancomponents.usecase.sample.jvm.Gender.FEMALE
 import guru.stefma.cleancomponents.usecase.sample.jvm.GetUsePointsForUserIdUseCase.Params
 import io.reactivex.Single
