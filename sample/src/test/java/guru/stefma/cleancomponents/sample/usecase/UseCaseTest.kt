@@ -1,11 +1,11 @@
 package guru.stefma.cleancomponents.sample.usecase
 
 import com.nhaarman.mockitokotlin2.mock
-import guru.stefma.cleancomponents.usecase.CompletableUseCase
-import guru.stefma.cleancomponents.usecase.MaybeUseCase
-import guru.stefma.cleancomponents.usecase.ObservableUseCase
-import guru.stefma.cleancomponents.usecase.SingleUseCase
 import guru.stefma.cleancomponents.usecase.UseCase
+import guru.stefma.cleancomponents.usecase.rx.CompletableUseCase
+import guru.stefma.cleancomponents.usecase.rx.MaybeUseCase
+import guru.stefma.cleancomponents.usecase.rx.ObservableUseCase
+import guru.stefma.cleancomponents.usecase.rx.SingleUseCase
 import io.reactivex.schedulers.TestScheduler
 import org.assertj.core.api.Assertions.*
 import org.junit.*

@@ -1,11 +1,11 @@
 package guru.stefma.cleancomponents.sample.usecase
 
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usecase.CompletableUseCase
-import guru.stefma.cleancomponents.usecase.MaybeUseCase
-import guru.stefma.cleancomponents.usecase.ObservableUseCase
-import guru.stefma.cleancomponents.usecase.RxUseCase
-import guru.stefma.cleancomponents.usecase.SingleUseCase
+import guru.stefma.cleancomponents.usecase.rx.MaybeUseCase
+import guru.stefma.cleancomponents.usecase.rx.ObservableUseCase
+import guru.stefma.cleancomponents.usecase.rx.RxUseCase
+import guru.stefma.cleancomponents.usecase.rx.SingleUseCase
+import guru.stefma.cleancomponents.usecase.rx.CompletableUseCase
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -24,10 +24,10 @@ class TestSingleUseCase(
 }
 
 @UseCase
-class CustomUseCase (
+class CustomUseCase(
         override val executionScheduler: Scheduler,
         override val postExecutionScheduler: Scheduler
-): CompletableUseCase<CustomUseCase.Uhu<String, Int, Pair<String, Int>>> {
+) : CompletableUseCase<CustomUseCase.Uhu<String, Int, Pair<String, Int>>> {
 
     override fun buildUseCase(params: Uhu<String, Int, Pair<String, Int>>): Completable {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
