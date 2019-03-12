@@ -49,6 +49,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation project(":usekase")
     kapt project(":usekase-processor")
+    // Need rxjava for usekase
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
 
     testImplementation "junit:junit:4.12"
     testImplementation "org.assertj:assertj-core:3.12.1"
