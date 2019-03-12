@@ -4,7 +4,7 @@ import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeAliasSpec
 import guru.stefma.cleancomponents.annotation.UseCase
-import guru.stefma.cleancomponents.usecase.*
+import guru.stefma.cleancomponents.usecase.rx.*
 import me.eugeniomarletti.kotlin.metadata.*
 import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
 import me.eugeniomarletti.kotlin.processing.KotlinAbstractProcessor
