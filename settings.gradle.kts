@@ -5,12 +5,12 @@ pluginManagement {
     }
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == 'com.novoda.bintray-release') {
+            if (requested.id.id == "com.novoda.bintray-release") {
                 useModule("com.novoda:bintray-release:${requested.version}")
             }
         }
     }
 }
 
-include ':sample', ':usekase-sample'
-include ':usekase-annotation', ':usekase', ':usekase-rx', ':usekase-coroutines', ':usekase-processor'
+include(":samples:android", ":samples:jvm")
+include(":usekase-annotation", ":usekase", ":usekase-rx", ":usekase-coroutines", ":usekase-processor")

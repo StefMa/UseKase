@@ -35,14 +35,14 @@ jobs:
       - run:
           environment:
             ANDROID_HOME: "/home/circleci/android-sdk" # TODO: Try to don't hardcode me and use $HOME env variable
-          command: ./gradlew :sample:testDebugUnitTest --no-daemon
+          command: ./gradlew :samples:android:testDebugUnitTest --no-daemon
 
       - run:
           environment:
             ANDROID_HOME: "/home/circleci/android-sdk" # TODO: Try to don't hardcode me and use $HOME env variable
-          command: ./gradlew :sample:testReleaseUnitTest --no-daemon
+          command: ./gradlew :samples:android:testReleaseUnitTest --no-daemon
 
       - run:
           environment:
             ANDROID_HOME: "/home/circleci/android-sdk" # TODO: Try to don't hardcode me and use $HOME env variable
-          command: ./gradlew :usekase-sample:test --no-daemon
+          command: ./gradlew :samples:jvm:test --no-daemon

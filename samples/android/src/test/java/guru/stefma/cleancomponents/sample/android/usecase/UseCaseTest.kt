@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.sample.usecase
+package guru.stefma.cleancomponents.sample.android.usecase
 
 import com.nhaarman.mockitokotlin2.mock
 import guru.stefma.cleancomponents.usecase.UseCase

@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.sample
+package guru.stefma.cleancomponents.sample.android
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
