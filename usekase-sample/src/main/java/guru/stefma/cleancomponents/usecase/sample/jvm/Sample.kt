@@ -1,6 +1,6 @@
 package guru.stefma.cleancomponents.usecase.sample.jvm
 
-import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.annotation.UseCase
 import guru.stefma.cleancomponents.usecase.coroutines.CoroutineUseCase
 import guru.stefma.cleancomponents.usecase.rx.SingleUseCase
 import guru.stefma.cleancomponents.usecase.sample.jvm.GetUserUseCase.Params

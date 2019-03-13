@@ -3,7 +3,7 @@ package guru.stefma.cleancomponents.processor.usecase
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeAliasSpec
-import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.annotation.UseCase
 import guru.stefma.cleancomponents.usecase.coroutines.CoroutineUseCase
 import guru.stefma.cleancomponents.usecase.rx.*
 import me.eugeniomarletti.kotlin.metadata.*

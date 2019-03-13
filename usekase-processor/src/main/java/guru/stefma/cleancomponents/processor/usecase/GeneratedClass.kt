@@ -4,7 +4,7 @@ import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.ParameterizedTypeName
 import com.squareup.kotlinpoet.TypeName
 import com.squareup.kotlinpoet.TypeVariableName
-import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.annotation.UseCase
 import javax.annotation.processing.Messager
 import javax.lang.model.element.Element
 

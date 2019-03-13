@@ -1,6 +1,6 @@
 package guru.stefma.cleancomponents.sample.usecase
 
-import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.annotation.UseCase
 import guru.stefma.cleancomponents.usecase.rx.MaybeUseCase
 import guru.stefma.cleancomponents.usecase.rx.ObservableUseCase
 import guru.stefma.cleancomponents.usecase.rx.RxUseCase
