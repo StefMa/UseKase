@@ -10,8 +10,8 @@ repositories {
 dependencies {
     api(project(":usekase-annotation"))
     implementation(kotlin("stdlib-jdk7"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
 
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
     testImplementation("org.assertj:assertj-core:3.12.1")
 }
