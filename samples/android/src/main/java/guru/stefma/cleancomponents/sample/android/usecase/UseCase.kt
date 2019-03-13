@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.sample.usecase
+package guru.stefma.cleancomponents.sample.android.usecase
 
 import guru.stefma.cleancomponents.usecase.annotation.UseCase
 import guru.stefma.cleancomponents.usecase.rx.MaybeUseCase

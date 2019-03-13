@@ -17,7 +17,7 @@ publish {
     artifactId = "usekase-annotation"
     uploadName = "UseKase-Annotation"
     publishVersion = "0.0.4"
-    desc = "Provides a annotation process for the default UseCase implementations for the Clean Architecture"
+    desc = "Provides a UseCase annotation for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
     setLicences("MIT")
 }
