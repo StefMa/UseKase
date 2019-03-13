@@ -1,4 +1,4 @@
-package guru.stefma.cleancomponents.annotation
+package guru.stefma.cleancomponents.usecase.annotation
 
 /**
  * Use this annotation over an [UseCase][guru.stefma.cleancomponents.usekase.UseCase]

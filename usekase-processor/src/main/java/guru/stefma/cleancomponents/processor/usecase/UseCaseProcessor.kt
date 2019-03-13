@@ -3,7 +3,8 @@ package guru.stefma.cleancomponents.processor.usecase
 import com.google.auto.service.AutoService
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.TypeAliasSpec
-import guru.stefma.cleancomponents.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.annotation.UseCase
+import guru.stefma.cleancomponents.usecase.coroutines.CoroutineUseCase
 import guru.stefma.cleancomponents.usecase.rx.*
 import me.eugeniomarletti.kotlin.metadata.*
 import me.eugeniomarletti.kotlin.metadata.shadow.metadata.ProtoBuf
@@ -101,6 +102,7 @@ private fun ProtoBuf.Class.findUseCase(classData: ClassData): String {
                 || fullName.contains(RxUseCase::class.java.simpleName)
                 || fullName.contains(FlowableUseCase::class.java.simpleName)
                 || fullName.contains(guru.stefma.cleancomponents.usecase.UseCase::class.java.simpleName)
+                || fullName.contains(CoroutineUseCase::class.java.simpleName)
     }
 
     return foundUseCase?.extractFullName(classData) ?: throw IllegalArgumentException("You don't implement a UseCase!")

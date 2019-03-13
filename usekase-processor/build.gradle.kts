@@ -15,6 +15,7 @@ dependencies {
     implementation("com.google.auto.service:auto-service:1.0-rc4")
     kapt("com.google.auto.service:auto-service:1.0-rc4")
     compileOnly(project(":usekase-rx"))
+    compileOnly(project(":usekase-coroutines"))
 }
 
 publish {
