@@ -24,7 +24,7 @@ publish {
     artifactId = "usekase-processor"
     uploadName = "UseKase-Processor"
     publishVersion = "0.0.4"
-    desc = "Provides a annotation process for the default UseCase implementations for the Clean Architecture"
+    desc = "Provides a annotation processor for the UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
     setLicences("MIT")
 }

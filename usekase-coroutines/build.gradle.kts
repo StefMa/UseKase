@@ -26,7 +26,7 @@ publish {
     artifactId = "usekase-coroutines"
     uploadName = "UseKase-Coroutines"
     publishVersion = "0.0.4"
-    desc = "Provides default UseCase implementations for the Clean Architecture"
+    desc = "Provides a corotuine UseCase implementation for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
     setLicences("MIT")
 }

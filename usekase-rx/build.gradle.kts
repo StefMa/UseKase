@@ -26,7 +26,7 @@ publish {
     artifactId = "usekase-rx"
     uploadName = "UseKase-Rx"
     publishVersion = "0.0.4"
-    desc = "Provides default UseCase implementations for the Clean Architecture"
+    desc = "Provides reactive UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
     setLicences("MIT")
 }
