@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.3.21"
     kotlin("kapt") version "1.3.21"
-    id("com.novoda.bintray-release") version "0.8.1"
+    id("com.novoda.bintray-release") version "0.9.1"
 }
 
 repositories {
