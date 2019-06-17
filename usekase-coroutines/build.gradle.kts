@@ -24,7 +24,7 @@ publish {
     userOrg = "stefma"
     groupId = "guru.stefma.cleancomponents"
     artifactId = "usekase-coroutines"
-    uploadName = "UseKase-Coroutines"
+    uploadName = "UseKase"
     publishVersion = "1.0.0"
     desc = "Provides a corotuine UseCase implementation for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"

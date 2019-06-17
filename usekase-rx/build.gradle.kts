@@ -24,7 +24,7 @@ publish {
     userOrg = "stefma"
     groupId = "guru.stefma.cleancomponents"
     artifactId = "usekase-rx"
-    uploadName = "UseKase-Rx"
+    uploadName = "UseKase"
     publishVersion = "1.0.0"
     desc = "Provides reactive UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"

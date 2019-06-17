@@ -22,7 +22,7 @@ publish {
     userOrg = "stefma"
     groupId = "guru.stefma.cleancomponents"
     artifactId = "usekase-processor"
-    uploadName = "UseKase-Processor"
+    uploadName = "UseKase"
     publishVersion = "1.0.0"
     desc = "Provides a annotation processor for the UseCase implementations for the Clean Architecture"
     website = "https://github.com/StefMa/UseKase"
