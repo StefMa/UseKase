@@ -14,4 +14,18 @@ interface CoroutineUseCase<R, P> {
 
     suspend fun execute(params: P): R
 
+    /**
+     * For UseCases which don't need any parameters:
+     * ```
+     * MyUseCase : UseCase<Result, UseCase.None> {
+     *
+     *     override fun execute(params: None): Result { /* ... */ }
+     *
+     *     /* ... */
+     * }
+     *
+     * MyUseCase().execute(UseCase.None)
+     * ```
+     */
+    object None
 }

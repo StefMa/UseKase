@@ -15,4 +15,19 @@ interface UseCase<R, P> {
     fun buildUseCase(params: P): R
 
     fun execute(params: P) = buildUseCase(params)
+
+    /**
+     * For UseCases which don't need any parameters:
+     * ```
+     * MyUseCase : UseCase<Result, UseCase.None> {
+     *
+     *     override fun execute(params: None): Result { /* ... */ }
+     *
+     *     /* ... */
+     * }
+     *
+     * MyUseCase().execute(UseCase.None)
+     * ```
+     */
+    object None
 }
