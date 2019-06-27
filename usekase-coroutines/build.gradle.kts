@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.3.40"
     id("com.novoda.bintray-release") version "0.9.1"
@@ -18,6 +20,13 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
     testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
     testImplementation("org.assertj:assertj-core:3.12.1")
+}
+
+tasks.withType(KotlinCompile::class.java).all {
+    kotlinOptions.apply {
+        jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xallow-result-return-type")
+    }
 }
 
 tasks.withType<Test> {

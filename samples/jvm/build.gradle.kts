@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.3.21"
     kotlin("kapt") version "1.3.21"
@@ -29,4 +31,11 @@ sourceSets {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.withType(KotlinCompile::class.java).all {
+    kotlinOptions.apply {
+        jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xallow-result-return-type")
+    }
 }

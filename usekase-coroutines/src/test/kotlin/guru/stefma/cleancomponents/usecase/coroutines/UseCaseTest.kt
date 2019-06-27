@@ -42,8 +42,8 @@ class UseCaseTest {
 
     inner class DefaultCoroutineUseCase : CoroutineUseCase<String, Unit>() {
 
-        override suspend fun execute(params: Unit): String {
-            return successResult
+        override suspend fun execute(params: Unit): Result<String> {
+            return Result.success(successResult)
         }
     }
 }
