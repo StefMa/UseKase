@@ -1,70 +1,49 @@
 package guru.stefma.cleancomponents.usecase.coroutines
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.TestCoroutineContext
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.*
+import java.util.concurrent.Executors
 
-@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class UseCaseTest {
 
-    private val testContext = TestCoroutineContext()
+    private val successResult = "Value"
+
+    private val mainThreadSurrogate = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+
+    @BeforeEach
+    fun setUp() {
+        Dispatchers.setMain(mainThreadSurrogate)
+    }
+
+    @AfterEach
+    fun tearDown() {
+        Dispatchers.resetMain()
+        mainThreadSurrogate.close()
+    }
 
     @Test
-    fun `default coroutineusecase`() {
+    fun `default coroutineusecase`() = runBlockingTest {
         val useCaseImpl = DefaultCoroutineUseCase()
-        val scope = CoroutineScope(testContext)
 
-        var value = ""
-        scope.launch {
-            value = useCaseImpl.execute(Unit)
-        }
+        lateinit var result: String
+        useCaseImpl(Unit,
+            onSuccess = { result = it },
+            onFailure = { fail(it) })
 
-        testContext.triggerActions()
-        assertThat(value).isEqualTo("Value")
+        assertThat(result).isEqualTo(successResult)
     }
 
-    @Test
-    fun `default coroutineusecase with delay`() {
-        val delay: Long = 500
-        val useCaseImpl = DefaultCoroutineUseCase(delay)
-        val scope = CoroutineScope(testContext)
-
-        var value = ""
-        scope.launch {
-            value = useCaseImpl.execute(Unit)
-        }
-
-        testContext.triggerActions()
-        // No value - because the execution take longer
-        assertThat(value).isEqualTo("")
-    }
-
-    @Test
-    fun `default coroutineusecase with delay successfully`() {
-        val delay: Long = 500
-        val useCaseImpl = DefaultCoroutineUseCase(delay)
-        val scope = CoroutineScope(testContext)
-
-        var value = ""
-        scope.launch {
-            value = useCaseImpl.execute(Unit)
-        }
-
-        testContext.advanceTimeBy(500)
-        testContext.triggerActions()
-        assertThat(value).isEqualTo("Value")
-    }
-
-    class DefaultCoroutineUseCase(private val delay: Long = 0) : CoroutineUseCase<String, Unit> {
+    inner class DefaultCoroutineUseCase : CoroutineUseCase<String, Unit>() {
 
         override suspend fun execute(params: Unit): String {
-            delay(delay)
-            return "Value"
+            return successResult
         }
     }
-
 }
