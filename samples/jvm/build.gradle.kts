@@ -18,6 +18,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")
     testImplementation("org.assertj:assertj-core:3.12.1")
     testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1")
 }
 
 // Add generated kapt source code to main sourceSet

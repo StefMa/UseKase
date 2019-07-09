@@ -6,21 +6,18 @@ import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import guru.stefma.cleancomponents.usecase.sample.jvm.Gender.FEMALE
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineScope
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 
-@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class GetUsePointsForUserIdCoroutineUseCaseTest {
 
-    private val testContext = TestCoroutineScope()
+    private val coroutineScope = TestCoroutineScope()
 
     private val mockGetUser = mock<GetUserCoroutine>()
-
-    private val coroutineScope = CoroutineScope(testContext)
 
     @Test
     fun `test get points successfully`() {
@@ -33,7 +30,6 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
             points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId")).getOrNull()
         }
 
-        testContext.triggerActions()
         assertThat(points).isEqualTo(99)
     }
 
@@ -47,8 +43,7 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
             points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId")).getOrNull()
         }
 
-        testContext.triggerActions()
-        assertThat(testContext.exceptions[0]).isInstanceOf(Throwable::class.java)
+        assertThat(coroutineScope.uncaughtExceptions[0]).isInstanceOf(Throwable::class.java)
         assertThat(points).isNull()
     }
 }
