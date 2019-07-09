@@ -14,8 +14,6 @@ dependencies {
     implementation(project(":usekase-coroutines"))
     kapt(project(":usekase-processor"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.21")
-    // This is for usekase-rx
-    implementation("io.reactivex.rxjava2:rxjava:2.2.7")
 
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")
     testImplementation("org.assertj:assertj-core:3.12.1")
