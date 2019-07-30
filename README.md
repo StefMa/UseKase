@@ -106,7 +106,7 @@ GlobalScope.launch {
 However, the module currently uses the experimental `Result` class as a return type. You need to enable this first
 by putting this in your `build.gradle.kts`:
 ```groovy
-tasks.withType(KotlinCompile::class.java).all {
+tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions.apply {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xallow-result-return-type")

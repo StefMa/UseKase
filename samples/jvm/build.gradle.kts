@@ -32,7 +32,7 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-tasks.withType(KotlinCompile::class.java).all {
+tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions.apply {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xallow-result-return-type")

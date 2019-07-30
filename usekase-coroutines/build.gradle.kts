@@ -22,7 +22,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.12.1")
 }
 
-tasks.withType(KotlinCompile::class.java).all {
+tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions.apply {
         jvmTarget = "1.8"
         freeCompilerArgs = listOf("-Xallow-result-return-type")
