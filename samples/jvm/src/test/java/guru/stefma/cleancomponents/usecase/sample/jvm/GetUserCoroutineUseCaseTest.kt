@@ -9,7 +9,7 @@ import org.junit.jupiter.api.*
 @ExperimentalCoroutinesApi
 class GetUserCoroutineUseCaseTest {
 
-    private val testContext = TestCoroutineScope()
+    private val coroutineScope = TestCoroutineScope()
 
     private val useCase = GetUserCoroutineUseCase()
 
@@ -17,7 +17,7 @@ class GetUserCoroutineUseCaseTest {
     fun `test get user`() {
         var user: User? = null
 
-        testContext.launch {
+        coroutineScope.launch {
             user = useCase.execute(GetUserCoroutineUseCase.Params("userId")).getOrNull()
         }
 
