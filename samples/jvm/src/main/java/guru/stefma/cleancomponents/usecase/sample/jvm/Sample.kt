@@ -65,7 +65,7 @@ class GetUsePointsForUserIdUseCase(
 
 @UseCase
 class GetUserCoroutineUseCase(
-    override val callbackDispatcher: CoroutineContext = Dispatchers.IO
+    override val callbackDispatcher: CoroutineContext = Dispatchers.Default
 ) : CoroutineUseCase<User, GetUserCoroutineUseCase.Params>() {
 
     override suspend fun execute(params: Params): Result<User> {
@@ -78,7 +78,7 @@ class GetUserCoroutineUseCase(
 @UseCase
 class GetUsePointsForUserIdCoroutineUseCase(
     private val getUser: GetUserCoroutine,
-    override val callbackDispatcher: CoroutineContext = Dispatchers.IO
+    override val callbackDispatcher: CoroutineContext = Dispatchers.Default
 ) : CoroutineUseCase<Int, GetUsePointsForUserIdCoroutineUseCase.Params>() {
 
     override suspend fun execute(params: Params): Result<Int> {
