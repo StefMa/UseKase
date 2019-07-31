@@ -6,7 +6,6 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import guru.stefma.cleancomponents.usecase.sample.jvm.Gender.FEMALE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.*
@@ -22,7 +21,7 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
     @Test
     fun `test get points successfully`() {
         val user = User("id", "Name", FEMALE, "anyKey")
-        coroutineScope.launch { whenever(mockGetUser.buildUseCase(any())) doReturn Result.success(user) }
+        coroutineScope.runBlockingTest { whenever(mockGetUser.buildUseCase(any())) doReturn Result.success(user) }
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
 
@@ -36,18 +35,20 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
     }
 
     @Test
-    fun `test get points on error`() = runBlockingTest {
+    fun `test get points on error`() {
         val throwable = Throwable()
-        whenever(mockGetUser.buildUseCase(any())) doReturn Result.failure(throwable)
+        coroutineScope.runBlockingTest { whenever(mockGetUser.buildUseCase(any())) doReturn Result.failure(throwable) }
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
         var exception: Throwable? = null
 
-        useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
-            points = it
-        }, {
-            exception = it
-        })
+        coroutineScope.runBlockingTest {
+            useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
+                points = it
+            }, {
+                exception = it
+            })
+        }
 
         assertThat(exception).isEqualTo(throwable)
         assertThat(points).isNull()

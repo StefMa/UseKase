@@ -3,6 +3,7 @@ package guru.stefma.cleancomponents.usecase.coroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
@@ -17,6 +18,8 @@ class UseCaseTest {
 
     private val mainThreadSurrogate = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
+    private val coroutineScope = TestCoroutineScope()
+
     @BeforeEach
     fun setUp() {
         Dispatchers.setMain(mainThreadSurrogate)
@@ -29,14 +32,15 @@ class UseCaseTest {
     }
 
     @Test
-    fun `default coroutineusecase`() = runBlockingTest {
+    fun `default coroutineusecase`() {
         val useCaseImpl = DefaultCoroutineUseCase()
 
         lateinit var result: String
-        useCaseImpl(Unit,
-            onSuccess = { result = it },
-            onFailure = { fail(it) })
-
+        coroutineScope.runBlockingTest {
+            useCaseImpl(Unit,
+                onSuccess = { result = it },
+                onFailure = { fail(it) })
+        }
         assertThat(result).isEqualTo(successResult)
     }
 
