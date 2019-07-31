@@ -2,13 +2,13 @@ package guru.stefma.cleancomponents.usecase.sample.jvm
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
-import com.nhaarman.mockitokotlin2.doThrow
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import guru.stefma.cleancomponents.usecase.sample.jvm.Gender.FEMALE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.*
 
@@ -26,24 +26,30 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
 
-        coroutineScope.launch {
-            points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId")).getOrNull()
+        coroutineScope.runBlockingTest {
+            useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
+                points = it
+            }, {})
         }
 
         assertThat(points).isEqualTo(99)
     }
 
     @Test
-    fun `test get points on error`() {
-        coroutineScope.launch { whenever(mockGetUser.execute(any())) doThrow Throwable() }
+    fun `test get points on error`() = runBlockingTest {
+        val throwable = Throwable()
+        whenever(mockGetUser.execute(any())) doReturn Result.failure(throwable)
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
+        var exception: Throwable? = null
 
-        coroutineScope.launch {
-            points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId")).getOrNull()
-        }
+        useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
+            points = it
+        }, {
+            exception = it
+        })
 
-        assertThat(coroutineScope.uncaughtExceptions[0]).isInstanceOf(Throwable::class.java)
+        assertThat(exception).isEqualTo(throwable)
         assertThat(points).isNull()
     }
 }
