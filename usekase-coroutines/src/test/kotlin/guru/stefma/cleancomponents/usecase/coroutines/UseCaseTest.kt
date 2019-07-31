@@ -40,7 +40,7 @@ class UseCaseTest {
         assertThat(result).isEqualTo(successResult)
     }
 
-    inner class DefaultCoroutineUseCase : CoroutineUseCase<String, Unit>() {
+    inner class DefaultCoroutineUseCase : CoroutineUseCase<String, Unit> {
 
         override suspend fun buildUseCase(params: Unit): Result<String> {
             return Result.success(successResult)
