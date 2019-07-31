@@ -17,14 +17,15 @@ import kotlin.coroutines.CoroutineContext
  * @param Type The type which you expect to be returned by the use case.
  * @param Params The parameters which the use case needs as an input.
  */
-abstract class CoroutineUseCase<out Type, in Params> where Type : Any {
+interface CoroutineUseCase<out Type, in Params> where Type : Any {
 
-    open val callbackDispatcher: CoroutineContext = Dispatchers.Main
+    val callbackDispatcher: CoroutineContext
+        get() = Dispatchers.Main
 
     /**
      * Runs the actual logic of the use case.
      */
-    abstract suspend fun execute(params: Params): Result<Type>
+    suspend fun execute(params: Params): Result<Type>
 
     suspend operator fun invoke(params: Params, onSuccess: (Type) -> Unit, onFailure: (Throwable) -> Unit) {
         val result = execute(params)
