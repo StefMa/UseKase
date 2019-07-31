@@ -10,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
  *
  * Use this base class to create a use case with input [parameters][Params] and an expected [result][Type].
  *
- * By default, once your overridden [execute] method returns, the callback lambdas passed to [invoke] will execute
+ * By default, once your overridden [buildUseCase] method returns, the callback lambdas passed to [invoke] will buildUseCase
  * on the [main thread][Dispatchers.Main]. This requires a runtime dependency of coroutines that adds a main
  * dispatcher. You can override [callbackDispatcher] to change this behavior.
  *
@@ -25,10 +25,10 @@ interface CoroutineUseCase<out Type, in Params> where Type : Any {
     /**
      * Runs the actual logic of the use case.
      */
-    suspend fun execute(params: Params): Result<Type>
+    suspend fun buildUseCase(params: Params): Result<Type>
 
     suspend operator fun invoke(params: Params, onSuccess: (Type) -> Unit, onFailure: (Throwable) -> Unit) {
-        val result = execute(params)
+        val result = buildUseCase(params)
 
         coroutineScope {
             launch(callbackDispatcher) {

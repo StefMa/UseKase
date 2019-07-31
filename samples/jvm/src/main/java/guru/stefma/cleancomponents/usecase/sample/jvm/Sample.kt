@@ -68,7 +68,7 @@ class GetUserCoroutineUseCase(
     override val callbackDispatcher: CoroutineContext = Dispatchers.Default
 ) : CoroutineUseCase<User, GetUserCoroutineUseCase.Params> {
 
-    override suspend fun execute(params: Params): Result<User> {
+    override suspend fun buildUseCase(params: Params): Result<User> {
         return Result.success(User(params.userId, "Thorsten", MALE, Random().nextInt(1000).toString()))
     }
 
@@ -81,8 +81,8 @@ class GetUsePointsForUserIdCoroutineUseCase(
     override val callbackDispatcher: CoroutineContext = Dispatchers.Default
 ) : CoroutineUseCase<Int, GetUsePointsForUserIdCoroutineUseCase.Params> {
 
-    override suspend fun execute(params: Params): Result<Int> {
-        return getUser.execute(GetUserCoroutineUseCase.Params(params.userId))
+    override suspend fun buildUseCase(params: Params): Result<Int> {
+        return getUser.buildUseCase(GetUserCoroutineUseCase.Params(params.userId))
             .map { it.authorizationKey }
             .map { 99 }
     }

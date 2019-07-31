@@ -22,7 +22,7 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
     @Test
     fun `test get points successfully`() {
         val user = User("id", "Name", FEMALE, "anyKey")
-        coroutineScope.launch { whenever(mockGetUser.execute(any())) doReturn Result.success(user) }
+        coroutineScope.launch { whenever(mockGetUser.buildUseCase(any())) doReturn Result.success(user) }
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
 
@@ -38,7 +38,7 @@ class GetUsePointsForUserIdCoroutineUseCaseTest {
     @Test
     fun `test get points on error`() = runBlockingTest {
         val throwable = Throwable()
-        whenever(mockGetUser.execute(any())) doReturn Result.failure(throwable)
+        whenever(mockGetUser.buildUseCase(any())) doReturn Result.failure(throwable)
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
         var exception: Throwable? = null

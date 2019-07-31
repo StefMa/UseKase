@@ -18,7 +18,7 @@ class GetUserCoroutineUseCaseTest {
         var user: User? = null
 
         coroutineScope.launch {
-            user = useCase.execute(GetUserCoroutineUseCase.Params("userId")).getOrNull()
+            user = useCase.buildUseCase(GetUserCoroutineUseCase.Params("userId")).getOrNull()
         }
 
         assertThat(user).isNotNull
