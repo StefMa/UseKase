@@ -1,16 +1,15 @@
 package guru.stefma.cleancomponents.usecase.sample.jvm
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.TestCoroutineContext
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.test.TestCoroutineScope
+import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.*
 
-@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class GetUserCoroutineUseCaseTest {
 
-    private val testContext = TestCoroutineContext()
+    private val coroutineScope = TestCoroutineScope()
 
     private val useCase = GetUserCoroutineUseCase()
 
@@ -18,12 +17,11 @@ class GetUserCoroutineUseCaseTest {
     fun `test get user`() {
         var user: User? = null
 
-        CoroutineScope(testContext).launch {
-            user = useCase.execute(GetUserCoroutineUseCase.Params("userId"))
+        coroutineScope.launch {
+            user = useCase.buildUseCase(GetUserCoroutineUseCase.Params("userId")).getOrNull()
         }
 
-        testContext.triggerActions()
-        assertThat(user).isNotNull()
+        assertThat(user).isNotNull
         user!!.apply {
             assertThat(id).isEqualTo("userId")
             assertThat(name).isEqualTo("Thorsten")

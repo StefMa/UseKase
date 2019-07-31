@@ -76,3 +76,40 @@ All available `UseCase` implementations are:
 * `ObservableUseCase<R, P>`
 * `MaybeUseCase<R, P>`
 * `CompletableUseCase<P>`
+
+### Kotlin coroutine version
+The `usekase-coroutines` module offers a base use case class `CoroutineUseCase` that you can extend:
+```kotlin
+@UseCase
+class GetUserCoroutineUseCase(
+    override val callbackDispatcher: CoroutineContext = Dispatchers.IO
+) : CoroutineUseCase<User, GetUserCoroutineUseCase.Params>() {
+
+    override suspend fun execute(params: Params): Result<User> {
+        return Result.success(User(params.userId, "Thorsten", MALE, Random().nextInt(1000).toString()))
+    }
+
+    data class Params(val userId: String)
+}
+```
+
+You have to execute it from a `CoroutineScope` like this:
+```kotlin
+GlobalScope.launch {
+  getUserCoroutine(
+    onFailure = { },
+    onError = { }
+  )
+}
+```
+
+However, the module currently uses the experimental `Result` class as a return type. You need to enable this first
+by putting this in your `build.gradle.kts`:
+```groovy
+tasks.withType(KotlinCompile::class.java).configureEach {
+    kotlinOptions.apply {
+        jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xallow-result-return-type")
+    }
+}
+```

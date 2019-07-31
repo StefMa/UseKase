@@ -1,50 +1,56 @@
 package guru.stefma.cleancomponents.usecase.sample.jvm
 
-import com.nhaarman.mockitokotlin2.*
+import com.nhaarman.mockitokotlin2.any
+import com.nhaarman.mockitokotlin2.doReturn
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.whenever
 import guru.stefma.cleancomponents.usecase.sample.jvm.Gender.FEMALE
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.TestCoroutineContext
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestCoroutineScope
+import kotlinx.coroutines.test.runBlockingTest
+import org.assertj.core.api.Assertions.*
+import org.junit.jupiter.api.*
 
-@ObsoleteCoroutinesApi
+@ExperimentalCoroutinesApi
 class GetUsePointsForUserIdCoroutineUseCaseTest {
 
-    private val testContext = TestCoroutineContext()
+    private val coroutineScope = TestCoroutineScope()
 
     private val mockGetUser = mock<GetUserCoroutine>()
-
-    private val coroutineScope = CoroutineScope(testContext)
 
     @Test
     fun `test get points successfully`() {
         val user = User("id", "Name", FEMALE, "anyKey")
-        coroutineScope.launch { whenever(mockGetUser.execute(any())) doReturn user }
+        coroutineScope.runBlockingTest { whenever(mockGetUser.buildUseCase(any())) doReturn Result.success(user) }
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
 
-        coroutineScope.launch {
-            points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId"))
+        coroutineScope.runBlockingTest {
+            useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
+                points = it
+            }, {})
         }
 
-        testContext.triggerActions()
         assertThat(points).isEqualTo(99)
     }
 
     @Test
     fun `test get points on error`() {
-        coroutineScope.launch { whenever(mockGetUser.execute(any())) doThrow Throwable() }
+        val throwable = Throwable()
+        coroutineScope.runBlockingTest { whenever(mockGetUser.buildUseCase(any())) doReturn Result.failure(throwable) }
         val useCase = GetUsePointsForUserIdCoroutineUseCase(mockGetUser)
         var points: Int? = null
+        var exception: Throwable? = null
 
-        coroutineScope.launch {
-            points = useCase.execute(GetUsePointsForUserIdCoroutineUseCase.Params("userId"))
+        coroutineScope.runBlockingTest {
+            useCase(GetUsePointsForUserIdCoroutineUseCase.Params("userId"), {
+                points = it
+            }, {
+                exception = it
+            })
         }
 
-        testContext.triggerActions()
-        assertThat(testContext.exceptions[0]).isInstanceOf(Throwable::class.java)
+        assertThat(exception).isEqualTo(throwable)
         assertThat(points).isNull()
     }
 }
